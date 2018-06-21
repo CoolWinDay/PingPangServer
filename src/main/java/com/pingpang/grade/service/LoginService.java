@@ -69,5 +69,4 @@ public class LoginService {
             userMapper.updateUser(user);
         }
     }
-
 }

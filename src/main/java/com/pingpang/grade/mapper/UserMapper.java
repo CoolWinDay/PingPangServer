@@ -11,6 +11,9 @@ public interface UserMapper {
     @Select("SELECT * FROM pp_user WHERE user_id = #{id}")
     UserBean selectUser(String id);
 
+    @Select("SELECT * FROM pp_user WHERE login_token = #{token}")
+    UserBean selectUserWithToken(String token);
+
     @Insert({"insert into pp_user(user_id, user_name, login_token, login_time) values(#{user_id}, #{user_name}, #{login_token}, #{login_time})"})
     int insertUser(UserBean person);
 

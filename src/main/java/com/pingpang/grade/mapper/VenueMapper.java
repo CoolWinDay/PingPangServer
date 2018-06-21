@@ -1,18 +1,21 @@
 package com.pingpang.grade.mapper;
 
-import com.pingpang.grade.model.UserBean;
 import com.pingpang.grade.model.VenueBean;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface VenueMapper {
 
+    @Select("SELECT * FROM pp_venue WHERE province = #{province} and city = #{city} and county = #{county}")
+    List<VenueBean> venuesWithCity(@Param("province") String province, @Param("city") String city, @Param("county") String county);
 
-//    @Select("SELECT * FROM pp_user WHERE user_id = #{id}")
-//    UserBean selectUser(String id);
-
-    @Insert({"insert into pp_venue(name, charger, phone, city, address, introduce) values(#{name}, #{charger}, #{phone}, #{city}, #{address}, #{introduce})"})
+    @Insert({"insert into pp_venue(user_id, name, charger, phone, province, city, county, address, introduce, create_date) values(#{user_id}, #{name}, #{charger}, #{phone}, #{province}, #{city}, #{county}, #{address}, #{introduce}, #{create_date})"})
     @Options(useGeneratedKeys = true, keyProperty = "kid", keyColumn = "kid")
     int insertVenue(VenueBean bean);
 
