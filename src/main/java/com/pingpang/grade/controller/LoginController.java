@@ -18,7 +18,7 @@ public class LoginController {
     private LoginService userService;
 
     @PostMapping("/login")
-    public ResponseBean loginUser(String username, String password) {
+    public JSONObject loginUser(String username, String password) {
         ResponseBean<UserBean> response = new ResponseBean<>();
 
         JSONObject jsonObject = userService.loginUserFromServer(username, password);
@@ -45,17 +45,17 @@ public class LoginController {
             // 更新user token
             userService.updateUser(user);
 
-            response.setData(user);
+//            response.setData(user);
         }
-        else {
-            String errInfo = Optional.ofNullable(jsonObject)
-                    .map(json -> json.getJSONObject("head"))
-                    .map(head -> head.getString("errInfo"))
-                    .orElse("登录失败");
-            response.setErrorCode(errCode);
-            response.setErrorInfo(errInfo);
-        }
+//        else {
+//            String errInfo = Optional.ofNullable(jsonObject)
+//                    .map(json -> json.getJSONObject("head"))
+//                    .map(head -> head.getString("errInfo"))
+//                    .orElse("登录失败");
+//            response.setErrorCode(errCode);
+//            response.setErrorInfo(errInfo);
+//        }
 
-        return response;
+        return jsonObject;
     }
 }

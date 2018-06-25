@@ -17,6 +17,8 @@ public class ExamBean {
     private String exam_grade;
     private String exam_time;
     private ExamineeBean examinee;
+    private VenueBean venue;
+    private AuditorBean auditor;
     private String create_date = MyDateUtils.stringWithDate(new Date());
 
     public int getKid() {
@@ -89,5 +91,21 @@ public class ExamBean {
 
     public void setExaminee(ExamineeBean examinee) {
         this.examinee = examinee;
+    }
+
+    public VenueBean getVenue() {
+        return venue;
+    }
+
+    public void setVenue(VenueBean venue) {
+        this.venue = venue;
+    }
+
+    public AuditorBean getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(AuditorBean auditor) {
+        this.auditor = auditor;
     }
 }

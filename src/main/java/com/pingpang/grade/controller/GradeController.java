@@ -285,4 +285,67 @@ public class GradeController {
 
         return response;
     }
+
+    @GetMapping("/grade/venue/myvenue")
+    public ResponseBean myVenueList(String token) {
+
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        List<VenueBean> venues = venueService.venuesWithUser(userBean.getUser_id());
+        if (venues != null) {
+            response.setData(venues);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/auditor/myauditor")
+    public ResponseBean myAuditorList(String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        List<AuditorBean> auditors = auditorService.auditorWithUser(userBean.getUser_id());
+
+        if (auditors != null) {
+            response.setData(auditors);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/auditor/myexam")
+    public ResponseBean myExamList(String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        List<ExamBean> exams = examService.examWithUser(userBean.getUser_id());
+
+        if (exams != null) {
+            response.setData(exams);
+        }
+
+        return response;
+    }
 }

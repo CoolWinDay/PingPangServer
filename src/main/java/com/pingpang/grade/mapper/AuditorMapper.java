@@ -15,6 +15,12 @@ public interface AuditorMapper {
     @Select("SELECT * FROM pp_auditor WHERE venue_id = #{venueid}")
     List<AuditorBean> auditorWithVenue(@Param("venueid") String venueid);
 
+    @Select("SELECT * FROM pp_auditor WHERE user_id = #{userid}")
+    List<AuditorBean> auditorWithUser(@Param("userid") String userid);
+
+    @Select("SELECT * FROM pp_auditor WHERE kid = #{kid}")
+    AuditorBean auditorWithId(@Param("kid") int kid);
+
     @Insert({"insert into pp_auditor(user_id, venue_id, name, sex, age, phone, idcard, introduce, create_date) values(#{user_id}, #{venue_id}, #{name}, #{sex}, #{age}, #{phone}, #{idcard}, #{introduce}, #{create_date})"})
     @Options(useGeneratedKeys = true, keyProperty = "kid", keyColumn = "kid")
     int insertAuditor(AuditorBean bean);

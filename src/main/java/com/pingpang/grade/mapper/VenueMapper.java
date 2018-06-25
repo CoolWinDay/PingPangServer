@@ -15,6 +15,12 @@ public interface VenueMapper {
     @Select("SELECT * FROM pp_venue WHERE province = #{province} and city = #{city} and county = #{county}")
     List<VenueBean> venuesWithCity(@Param("province") String province, @Param("city") String city, @Param("county") String county);
 
+    @Select("SELECT * FROM pp_venue WHERE user_id = #{userid}")
+    List<VenueBean> venuesWithUser(@Param("userid") String userid);
+
+    @Select("SELECT * FROM pp_venue WHERE kid = #{kid}")
+    VenueBean venueWithId(@Param("kid") int kid);
+
     @Insert({"insert into pp_venue(user_id, name, charger, phone, province, city, county, address, introduce, create_date) values(#{user_id}, #{name}, #{charger}, #{phone}, #{province}, #{city}, #{county}, #{address}, #{introduce}, #{create_date})"})
     @Options(useGeneratedKeys = true, keyProperty = "kid", keyColumn = "kid")
     int insertVenue(VenueBean bean);

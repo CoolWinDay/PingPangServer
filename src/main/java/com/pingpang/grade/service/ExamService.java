@@ -3,10 +3,12 @@ package com.pingpang.grade.service;
 import com.pingpang.grade.mapper.ExamMapper;
 import com.pingpang.grade.mapper.ExamineeMapper;
 import com.pingpang.grade.mapper.ImageMapper;
-import com.pingpang.grade.model.ExamBean;
-import com.pingpang.grade.model.ExamineeBean;
+import com.pingpang.grade.mapper.VenueMapper;
+import com.pingpang.grade.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ExamService {
@@ -15,24 +17,49 @@ public class ExamService {
     ExamMapper examMapper;
 
     @Autowired
+    ExamineeMapper examineeMapper;
+
+    @Autowired
     ImageMapper imageMapper;
+
+    @Autowired
+    VenueService venueService;
+
+    @Autowired
+    AuditorService auditorService;
 
     public int insertExam(ExamBean bean) {
         examMapper.insertExam(bean);
         return bean.getKid();
     }
 
-//    public List<AuditorBean> auditorWithVenue(String venueid) {
-//        List<AuditorBean> auditorList = auditorMapper.auditorWithVenue(venueid);
-//
-//        for (AuditorBean bean : auditorList) {
-//            List<ImageBean> avatarImage = imageMapper.imageList(2, bean.getKid(), 3);
-//            if (avatarImage.size() > 0) {
-//                bean.setAvatarImage(avatarImage.get(0));
-//            }
-//        }
-//
-//        return auditorList;
-//    }
+    public List<ExamBean> examWithUser(String userid) {
+        List<ExamBean> examList = examMapper.examWithUser(userid);
+
+        for (ExamBean bean : examList) {
+            ExamineeBean examineeBean = examineeMapper.examineeWithExamid(bean.getExaminee_id());
+            if (examineeBean != null) {
+                List<ImageBean> imageBeans = imageMapper.imageList(3, examineeBean.getKid(), 3);
+                if (imageBeans.size() > 0) {
+                    examineeBean.setAvatarImage(imageBeans.get(0));
+                }
+
+                bean.setExaminee(examineeBean);
+            }
+
+            VenueBean venueBean = venueService.venueWithId(bean.getVenue_id());
+            if (venueBean != null) {
+                bean.setVenue(venueBean);
+            }
+
+            AuditorBean auditorBean = auditorService.auditorWithId(bean.getAuditor_id());
+            if (auditorBean != null) {
+                bean.setAuditor(auditorBean);
+            }
+
+        }
+
+        return examList;
+    }
 
 }
