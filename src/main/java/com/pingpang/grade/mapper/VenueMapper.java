@@ -12,8 +12,11 @@ import java.util.List;
 @Repository
 public interface VenueMapper {
 
-    @Select("SELECT * FROM pp_venue WHERE province = #{province} and city = #{city} and county = #{county}")
+    @Select("SELECT * FROM pp_venue WHERE state = 1 and province = #{province} and city = #{city} and county = #{county}")
     List<VenueBean> venuesWithCity(@Param("province") String province, @Param("city") String city, @Param("county") String county);
+
+    @Select("SELECT * FROM pp_venue WHERE state = 0")
+    List<VenueBean> uncheckVenues();
 
     @Select("SELECT * FROM pp_venue WHERE user_id = #{userid}")
     List<VenueBean> venuesWithUser(@Param("userid") String userid);

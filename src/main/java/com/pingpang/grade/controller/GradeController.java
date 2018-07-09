@@ -274,9 +274,33 @@ public class GradeController {
         return response;
     }
 
+    @GetMapping("/grade/venue/unchecklist")
+    public ResponseBean uncheckVenueList() {
+        List<VenueBean> venues = venueService.uncheckVenues();
+
+        ResponseBean response = new ResponseBean();
+        if (venues != null) {
+            response.setData(venues);
+        }
+
+        return response;
+    }
+
     @GetMapping("/grade/auditor/list")
     public ResponseBean auditorList(String venueid, String token) {
         List<AuditorBean> auditors = auditorService.auditorWithVenue(venueid);
+
+        ResponseBean response = new ResponseBean();
+        if (auditors != null) {
+            response.setData(auditors);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/auditor/unchecklist")
+    public ResponseBean uncheckAuditorList() {
+        List<AuditorBean> auditors = auditorService.uncheckAuditorWithVenue();
 
         ResponseBean response = new ResponseBean();
         if (auditors != null) {

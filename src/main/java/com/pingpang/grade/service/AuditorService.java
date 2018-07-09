@@ -38,6 +38,19 @@ public class AuditorService {
         return auditorList;
     }
 
+    public List<AuditorBean> uncheckAuditorWithVenue() {
+        List<AuditorBean> auditorList = auditorMapper.uncheckAuditorWithVenue();
+
+        for (AuditorBean bean : auditorList) {
+            List<ImageBean> avatarImage = imageMapper.imageList(2, bean.getKid(), 3);
+            if (avatarImage.size() > 0) {
+                bean.setAvatarImage(avatarImage.get(0));
+            }
+        }
+
+        return auditorList;
+    }
+
     public List<AuditorBean> auditorWithUser(String userid) {
         List<AuditorBean> auditorList = auditorMapper.auditorWithUser(userid);
 

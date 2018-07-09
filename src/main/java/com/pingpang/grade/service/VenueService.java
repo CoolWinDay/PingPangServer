@@ -38,6 +38,18 @@ public class VenueService {
         return venueList;
     }
 
+    public List<VenueBean> uncheckVenues() {
+        List<VenueBean> venueList = venueMapper.uncheckVenues();
+
+        for (VenueBean bean : venueList) {
+            List<ImageBean> images = imageMapper.imageList(1, bean.getKid(), 1);
+            bean.getVenueImage().clear();
+            bean.getVenueImage().addAll(images);
+        }
+
+        return venueList;
+    }
+
     public List<VenueBean> venuesWithUser(String userid) {
         List<VenueBean> venueList = venueMapper.venuesWithUser(userid);
 
