@@ -21,6 +21,7 @@ public class VenueBean implements Serializable {
     private String county;
     private String address;
     private String introduce;
+    private int state;
     private String create_date = MyDateUtils.stringWithDate(new Date());
 
     private List<ImageBean> venueImage = new ArrayList<>();
@@ -119,5 +120,13 @@ public class VenueBean implements Serializable {
 
     public void setVenueImage(List<ImageBean> venueImage) {
         this.venueImage = venueImage;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
