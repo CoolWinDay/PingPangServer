@@ -49,6 +49,13 @@ public class AuditorService {
             if (avatarImage.size() > 0) {
                 bean.setAvatarImage(avatarImage.get(0));
             }
+
+            List<ImageBean> images = imageMapper.imageList(2, bean.getKid(), 2);
+            bean.getCertificateImage().clear();
+            bean.getCertificateImage().addAll(images);
+
+            VenueBean venueBean = venueMapper.venueWithId(bean.getVenue_id());
+            bean.setVenue(venueBean);
         }
 
         return auditorList;
