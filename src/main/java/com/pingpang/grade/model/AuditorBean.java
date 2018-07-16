@@ -13,7 +13,7 @@ public class AuditorBean implements Serializable {
 
     private int kid;
     private String user_id;
-    private String venue_id;
+    private int venue_id;
     private String name;
     private String sex;
     private String age;
@@ -24,6 +24,7 @@ public class AuditorBean implements Serializable {
 
     private List<ImageBean> certificateImage = new ArrayList<>();
     private ImageBean avatarImage;
+    private VenueBean venue;
 
     public int getKid() {
         return kid;
@@ -40,11 +41,11 @@ public class AuditorBean implements Serializable {
         this.user_id = user_id;
     }
 
-    public String getVenue_id() {
+    public int getVenue_id() {
         return venue_id;
     }
 
-    public void setVenue_id(String venue_id) {
+    public void setVenue_id(int venue_id) {
         this.venue_id = venue_id;
     }
 
@@ -118,5 +119,13 @@ public class AuditorBean implements Serializable {
 
     public void setAvatarImage(ImageBean avatarImage) {
         this.avatarImage = avatarImage;
+    }
+
+    public VenueBean getVenue() {
+        return venue;
+    }
+
+    public void setVenue(VenueBean venue) {
+        this.venue = venue;
     }
 }
