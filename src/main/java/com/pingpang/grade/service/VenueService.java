@@ -50,6 +50,11 @@ public class VenueService {
         return venueList;
     }
 
+    public boolean docheck(int venueid, String userid) {
+        int check = venueMapper.docheck(1, userid, venueid);
+        return check > 0;
+    }
+
     public List<VenueBean> venuesWithUser(String userid) {
         List<VenueBean> venueList = venueMapper.venuesWithUser(userid);
 

@@ -1,10 +1,7 @@
 package com.pingpang.grade.mapper;
 
 import com.pingpang.grade.model.VenueBean;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +25,6 @@ public interface VenueMapper {
     @Options(useGeneratedKeys = true, keyProperty = "kid", keyColumn = "kid")
     int insertVenue(VenueBean bean);
 
-//    @Update({"update pp_user set user_name=#{user_name}, login_token=#{login_token}, login_time=#{login_time} where user_id=#{user_id}"})
-//    void updateUser(UserBean person);
+    @Update({"update pp_venue set state=#{state}, check_user=#{userid} where kid = #{kid}"})
+    int docheck(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
 }

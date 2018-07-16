@@ -286,6 +286,27 @@ public class GradeController {
         return response;
     }
 
+    @GetMapping("/grade/venue/docheck")
+    public ResponseBean docheck(int venueid, String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        boolean isSuccess = venueService.docheck(venueid, userBean.getUser_id());
+        if (!isSuccess) {
+            response.setErrorCode(ResponseBean.ErrorOperationCode);
+            response.setErrorInfo(ResponseBean.ErrorOperationInfo);
+        }
+
+        return response;
+    }
+
     @GetMapping("/grade/auditor/list")
     public ResponseBean auditorList(String venueid, String token) {
         List<AuditorBean> auditors = auditorService.auditorWithVenue(venueid);

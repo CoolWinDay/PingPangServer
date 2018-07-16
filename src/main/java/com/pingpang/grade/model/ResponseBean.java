@@ -8,6 +8,9 @@ public class ResponseBean<T> {
     public static String ErrorDataCode = "88880002";
     public static String ErrorDataInfo = "上传数据错误";
 
+    public static String ErrorOperationCode = "88880003";
+    public static String ErrorOperationInfo = "操作失败";
+
     private String errorCode = "00000000";
     private String errorInfo = "请求成功";
     private T data;
