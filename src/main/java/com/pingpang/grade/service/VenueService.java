@@ -50,8 +50,8 @@ public class VenueService {
         return venueList;
     }
 
-    public boolean docheck(int venueid, String userid) {
-        int check = venueMapper.docheck(1, userid, venueid);
+    public boolean checkVenue(int kid, String userid) {
+        int check = venueMapper.checkVenue(1, userid, kid);
         return check > 0;
     }
 

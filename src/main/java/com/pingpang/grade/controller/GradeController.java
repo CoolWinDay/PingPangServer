@@ -287,7 +287,7 @@ public class GradeController {
     }
 
     @GetMapping("/grade/venue/docheck")
-    public ResponseBean docheck(int venueid, String token) {
+    public ResponseBean checkVenue(int kid, String token) {
         ResponseBean response = new ResponseBean();
 
         // 登录校验
@@ -298,7 +298,7 @@ public class GradeController {
             return response;
         }
 
-        boolean isSuccess = venueService.docheck(venueid, userBean.getUser_id());
+        boolean isSuccess = venueService.checkVenue(kid, userBean.getUser_id());
         if (!isSuccess) {
             response.setErrorCode(ResponseBean.ErrorOperationCode);
             response.setErrorInfo(ResponseBean.ErrorOperationInfo);
@@ -326,6 +326,27 @@ public class GradeController {
         ResponseBean response = new ResponseBean();
         if (auditors != null) {
             response.setData(auditors);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/auditor/docheck")
+    public ResponseBean checkAuditor(int kid, String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        boolean isSuccess = auditorService.checkAuditor(kid, userBean.getUser_id());
+        if (!isSuccess) {
+            response.setErrorCode(ResponseBean.ErrorOperationCode);
+            response.setErrorInfo(ResponseBean.ErrorOperationInfo);
         }
 
         return response;

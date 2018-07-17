@@ -86,4 +86,9 @@ public class AuditorService {
         return auditorBean;
     }
 
+    public boolean checkAuditor(int kid, String userid) {
+        int check = auditorMapper.checkAuditor(1, userid, kid);
+        return check > 0;
+    }
+
 }

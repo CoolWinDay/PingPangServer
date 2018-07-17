@@ -26,5 +26,5 @@ public interface VenueMapper {
     int insertVenue(VenueBean bean);
 
     @Update({"update pp_venue set state=#{state}, check_user=#{userid} where kid = #{kid}"})
-    int docheck(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
+    int checkVenue(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
 }
