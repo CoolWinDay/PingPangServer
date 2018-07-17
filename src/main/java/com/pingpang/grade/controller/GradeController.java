@@ -394,7 +394,7 @@ public class GradeController {
         return response;
     }
 
-    @GetMapping("/grade/auditor/myexam")
+    @GetMapping("/grade/exam/myexam")
     public ResponseBean myExamList(String token) {
         ResponseBean response = new ResponseBean();
 
@@ -410,6 +410,39 @@ public class GradeController {
 
         if (exams != null) {
             response.setData(exams);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/exam/unchecklist")
+    public ResponseBean uncheckExamList() {
+        List<ExamBean> auditors = examService.uncheckExams();
+
+        ResponseBean response = new ResponseBean();
+        if (auditors != null) {
+            response.setData(auditors);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/grade/exam/docheck")
+    public ResponseBean checkExam(int kid, String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        boolean isSuccess = examService.checkExam(kid, userBean.getUser_id());
+        if (!isSuccess) {
+            response.setErrorCode(ResponseBean.ErrorOperationCode);
+            response.setErrorInfo(ResponseBean.ErrorOperationInfo);
         }
 
         return response;
