@@ -1,15 +1,12 @@
 package com.pingpang.grade.model;
 
-import java.io.Serializable;
-
-public class UserBean implements Serializable {
-
-    private static final long serialVersionUID = -4797002544497006107L;
+public class UserBean {
 
     private String user_id;
     private String user_name;
     private String login_token;
     private String login_time;
+    private String groupid;
 
     public String getUser_id() {
         return user_id;
@@ -41,5 +38,13 @@ public class UserBean implements Serializable {
 
     public void setLogin_time(String login_time) {
         this.login_time = login_time;
+    }
+
+    public String getGroupid() {
+        return groupid;
+    }
+
+    public void setGroupid(String groupid) {
+        this.groupid = groupid;
     }
 }

@@ -33,6 +33,7 @@ public class LoginController {
             String token = jsonObject.getString("token");
             String uid = jsonObject.getString("uid");
             String uname = jsonObject.getString("userName");
+            String groupid = jsonObject.getString("groupid");
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateStr = formater.format(new Date());
 
@@ -41,6 +42,7 @@ public class LoginController {
             user.setUser_name(uname);
             user.setLogin_token(token);
             user.setLogin_time(dateStr);
+            user.setGroupid(groupid);
 
             // 更新user token
             userService.updateUser(user);

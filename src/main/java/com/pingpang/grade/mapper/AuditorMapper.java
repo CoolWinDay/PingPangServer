@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface AuditorMapper {
 
-    @Select("SELECT * FROM pp_auditor WHERE venue_id = #{venueid}")
+    @Select("SELECT * FROM pp_auditor WHERE state = 1 and venue_id = #{venueid}")
     List<AuditorBean> auditorWithVenue(@Param("venueid") String venueid);
 
     @Select("SELECT * FROM pp_auditor WHERE state = #{state}")

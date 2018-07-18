@@ -17,6 +17,6 @@ public interface UserMapper {
     @Insert({"insert into pp_user(user_id, user_name, login_token, login_time) values(#{user_id}, #{user_name}, #{login_token}, #{login_time})"})
     int insertUser(UserBean person);
 
-    @Update({"update pp_user set user_name=#{user_name}, login_token=#{login_token}, login_time=#{login_time} where user_id=#{user_id}"})
+    @Update({"update pp_user set user_name=#{user_name}, login_token=#{login_token}, login_time=#{login_time}, groupid=#{groupid} where user_id=#{user_id}"})
     void updateUser(UserBean person);
 }
