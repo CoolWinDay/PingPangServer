@@ -274,9 +274,9 @@ public class GradeController {
         return response;
     }
 
-    @GetMapping("/grade/venue/unchecklist")
-    public ResponseBean uncheckVenueList() {
-        List<VenueBean> venues = venueService.uncheckVenues();
+    @GetMapping("/grade/venue/checkliststate")
+    public ResponseBean checkVenueListWith(int state) {
+        List<VenueBean> venues = venueService.checkVenueWithState(state);
 
         ResponseBean response = new ResponseBean();
         if (venues != null) {
@@ -319,9 +319,9 @@ public class GradeController {
         return response;
     }
 
-    @GetMapping("/grade/auditor/unchecklist")
-    public ResponseBean uncheckAuditorList() {
-        List<AuditorBean> auditors = auditorService.uncheckAuditorWithVenue();
+    @GetMapping("/grade/auditor/checkliststate")
+    public ResponseBean checkAuditorListWith(int state) {
+        List<AuditorBean> auditors = auditorService.checkAuditorWithState(state);
 
         ResponseBean response = new ResponseBean();
         if (auditors != null) {
@@ -415,9 +415,9 @@ public class GradeController {
         return response;
     }
 
-    @GetMapping("/grade/exam/unchecklist")
-    public ResponseBean uncheckExamList() {
-        List<ExamBean> auditors = examService.uncheckExams();
+    @GetMapping("/grade/exam/checkliststate")
+    public ResponseBean checkExamListWith(int state) {
+        List<ExamBean> auditors = examService.checkExamsWithState(state);
 
         ResponseBean response = new ResponseBean();
         if (auditors != null) {

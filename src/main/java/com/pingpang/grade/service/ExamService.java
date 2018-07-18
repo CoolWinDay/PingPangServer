@@ -62,8 +62,8 @@ public class ExamService {
         return examList;
     }
 
-    public List<ExamBean> uncheckExams() {
-        List<ExamBean> examList = examMapper.uncheckExams();
+    public List<ExamBean> checkExamsWithState(int state) {
+        List<ExamBean> examList = examMapper.checkExamsWithState(state);
 
         for (ExamBean bean : examList) {
             ExamineeBean examineeBean = examineeMapper.examineeWithExamid(bean.getExaminee_id());

@@ -9,8 +9,6 @@ import java.util.List;
 
 public class AuditorBean implements Serializable {
 
-    private static final long serialVersionUID = -4797002544420006107L;
-
     private int kid;
     private String user_id;
     private int venue_id;
@@ -25,6 +23,7 @@ public class AuditorBean implements Serializable {
     private List<ImageBean> certificateImage = new ArrayList<>();
     private ImageBean avatarImage;
     private VenueBean venue;
+    private int state;
 
     public int getKid() {
         return kid;
@@ -127,5 +126,13 @@ public class AuditorBean implements Serializable {
 
     public void setVenue(VenueBean venue) {
         this.venue = venue;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

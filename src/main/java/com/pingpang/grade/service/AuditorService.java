@@ -41,8 +41,8 @@ public class AuditorService {
         return auditorList;
     }
 
-    public List<AuditorBean> uncheckAuditorWithVenue() {
-        List<AuditorBean> auditorList = auditorMapper.uncheckAuditorWithVenue();
+    public List<AuditorBean> checkAuditorWithState(int state) {
+        List<AuditorBean> auditorList = auditorMapper.checkAuditorWithState(state);
 
         for (AuditorBean bean : auditorList) {
             List<ImageBean> avatarImage = imageMapper.imageList(2, bean.getKid(), 3);

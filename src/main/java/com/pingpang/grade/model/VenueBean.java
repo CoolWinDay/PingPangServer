@@ -9,8 +9,6 @@ import java.util.List;
 
 public class VenueBean implements Serializable {
 
-    private static final long serialVersionUID = -4797002544496006107L;
-
     private int kid;
     private String user_id;
     private String name;

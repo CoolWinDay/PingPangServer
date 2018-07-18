@@ -20,6 +20,7 @@ public class ExamBean {
     private VenueBean venue;
     private AuditorBean auditor;
     private String create_date = MyDateUtils.stringWithDate(new Date());
+    private int state;
 
     public int getKid() {
         return kid;
@@ -107,5 +108,13 @@ public class ExamBean {
 
     public void setAuditor(AuditorBean auditor) {
         this.auditor = auditor;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

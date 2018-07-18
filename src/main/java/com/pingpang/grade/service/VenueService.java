@@ -38,8 +38,8 @@ public class VenueService {
         return venueList;
     }
 
-    public List<VenueBean> uncheckVenues() {
-        List<VenueBean> venueList = venueMapper.uncheckVenues();
+    public List<VenueBean> checkVenueWithState(int state) {
+        List<VenueBean> venueList = venueMapper.checkVenueWithState(state);
 
         for (VenueBean bean : venueList) {
             List<ImageBean> images = imageMapper.imageList(1, bean.getKid(), 1);
