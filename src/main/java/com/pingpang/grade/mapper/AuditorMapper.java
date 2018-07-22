@@ -15,8 +15,8 @@ public interface AuditorMapper {
     @Select("SELECT * FROM pp_auditor WHERE state = #{state}")
     List<AuditorBean> checkAuditorWithState(@Param("state") int state);
 
-    @Select("SELECT * FROM pp_auditor WHERE user_id = #{userid}")
-    List<AuditorBean> auditorWithUser(@Param("userid") String userid);
+    @Select("SELECT * FROM pp_auditor WHERE user_id = #{userid} or venue_id in (SELECT kid FROM pp_venue WHERE user_id = #{userid}) or kid in (SELECT auditor_id FROM pp_exam WHERE user_id = #{userid})")
+    List<AuditorBean> myAuditorList(@Param("userid") String userid);
 
     @Select("SELECT * FROM pp_auditor WHERE kid = #{kid}")
     AuditorBean auditorWithId(@Param("kid") int kid);

@@ -22,5 +22,9 @@ public class UserService {
         return null;
     }
 
+    public boolean updateUserRole(String user_id, int role) {
+        int row = userMapper.updateUserRole(user_id, role);
+        return row > 0;
+    }
 
 }

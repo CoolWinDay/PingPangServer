@@ -15,11 +15,11 @@ public interface VenueMapper {
     @Select("SELECT * FROM pp_venue WHERE state = #{state}")
     List<VenueBean> checkVenueWithState(@Param("state") int state);
 
-    @Select("SELECT * FROM pp_venue WHERE user_id = #{userid}")
-    List<VenueBean> venuesWithUser(@Param("userid") String userid);
-
     @Select("SELECT * FROM pp_venue WHERE kid = #{kid}")
     VenueBean venueWithId(@Param("kid") int kid);
+
+    @Select("SELECT * FROM pp_venue WHERE user_id = #{userid} or kid in (select venue_id from pp_auditor where user_id = #{userid}) or kid in (SELECT venue_id FROM pp_exam WHERE user_id = #{userid})")
+    List<VenueBean> myVenueList(@Param("userid") String userid);
 
     @Insert({"insert into pp_venue(user_id, name, charger, phone, province, city, county, address, introduce, create_date) values(#{user_id}, #{name}, #{charger}, #{phone}, #{province}, #{city}, #{county}, #{address}, #{introduce}, #{create_date})"})
     @Options(useGeneratedKeys = true, keyProperty = "kid", keyColumn = "kid")

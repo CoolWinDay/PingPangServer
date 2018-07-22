@@ -1,10 +1,11 @@
 package com.pingpang.grade.service;
 
 import com.pingpang.grade.mapper.ExamMapper;
-import com.pingpang.grade.mapper.ExamineeMapper;
 import com.pingpang.grade.mapper.ImageMapper;
-import com.pingpang.grade.mapper.VenueMapper;
-import com.pingpang.grade.model.*;
+import com.pingpang.grade.model.AuditorBean;
+import com.pingpang.grade.model.ExamBean;
+import com.pingpang.grade.model.ImageBean;
+import com.pingpang.grade.model.VenueBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,6 @@ public class ExamService {
 
     @Autowired
     ExamMapper examMapper;
-
-    @Autowired
-    ExamineeMapper examineeMapper;
 
     @Autowired
     ImageMapper imageMapper;
@@ -33,18 +31,13 @@ public class ExamService {
         return bean.getKid();
     }
 
-    public List<ExamBean> examWithUser(String userid) {
-        List<ExamBean> examList = examMapper.examWithUser(userid);
+    public List<ExamBean> myExamList(String userid) {
+        List<ExamBean> examList = examMapper.myExamList(userid);
 
         for (ExamBean bean : examList) {
-            ExamineeBean examineeBean = examineeMapper.examineeWithExamid(bean.getExaminee_id());
-            if (examineeBean != null) {
-                List<ImageBean> imageBeans = imageMapper.imageList(3, examineeBean.getKid(), 3);
-                if (imageBeans.size() > 0) {
-                    examineeBean.setAvatarImage(imageBeans.get(0));
-                }
-
-                bean.setExaminee(examineeBean);
+            List<ImageBean> imageBeans = imageMapper.imageList(3, bean.getKid(), 3);
+            if (imageBeans.size() > 0) {
+                bean.setAvatarImage(imageBeans.get(0));
             }
 
             VenueBean venueBean = venueService.venueWithId(bean.getVenue_id());
@@ -66,14 +59,9 @@ public class ExamService {
         List<ExamBean> examList = examMapper.checkExamsWithState(state);
 
         for (ExamBean bean : examList) {
-            ExamineeBean examineeBean = examineeMapper.examineeWithExamid(bean.getExaminee_id());
-            if (examineeBean != null) {
-                List<ImageBean> imageBeans = imageMapper.imageList(3, examineeBean.getKid(), 3);
-                if (imageBeans.size() > 0) {
-                    examineeBean.setAvatarImage(imageBeans.get(0));
-                }
-
-                bean.setExaminee(examineeBean);
+            List<ImageBean> imageBeans = imageMapper.imageList(3, bean.getKid(), 3);
+            if (imageBeans.size() > 0) {
+                bean.setAvatarImage(imageBeans.get(0));
             }
 
             VenueBean venueBean = venueService.venueWithId(bean.getVenue_id());

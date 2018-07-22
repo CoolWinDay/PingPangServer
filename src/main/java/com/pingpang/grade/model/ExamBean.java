@@ -2,10 +2,7 @@ package com.pingpang.grade.model;
 
 import com.pingpang.grade.utils.MyDateUtils;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ExamBean {
 
@@ -14,13 +11,18 @@ public class ExamBean {
     private int venue_id;
     private int auditor_id;
     private int examinee_id;
-    private String exam_grade;
-    private String exam_time;
-    private ExamineeBean examinee;
+    private String name;
+    private String sex;
+    private String age;
+    private String phone;
+    private String idcard;
+    private String grade;
+    private String exam_date;
     private VenueBean venue;
     private AuditorBean auditor;
     private String create_date = MyDateUtils.stringWithDate(new Date());
     private int state;
+    private ImageBean avatarImage;
 
     public int getKid() {
         return kid;
@@ -62,38 +64,6 @@ public class ExamBean {
         this.examinee_id = examinee_id;
     }
 
-    public String getExam_grade() {
-        return exam_grade;
-    }
-
-    public void setExam_grade(String exam_grade) {
-        this.exam_grade = exam_grade;
-    }
-
-    public String getExam_time() {
-        return exam_time;
-    }
-
-    public void setExam_time(String exam_time) {
-        this.exam_time = exam_time;
-    }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-
-    public ExamineeBean getExaminee() {
-        return examinee;
-    }
-
-    public void setExaminee(ExamineeBean examinee) {
-        this.examinee = examinee;
-    }
-
     public VenueBean getVenue() {
         return venue;
     }
@@ -116,5 +86,77 @@ public class ExamBean {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getExam_date() {
+        return exam_date;
+    }
+
+    public void setExam_date(String exam_date) {
+        this.exam_date = exam_date;
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
+
+    public ImageBean getAvatarImage() {
+        return avatarImage;
+    }
+
+    public void setAvatarImage(ImageBean avatarImage) {
+        this.avatarImage = avatarImage;
     }
 }

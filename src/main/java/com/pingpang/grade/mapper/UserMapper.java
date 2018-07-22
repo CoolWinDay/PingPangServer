@@ -2,6 +2,7 @@ package com.pingpang.grade.mapper;
 
 import com.pingpang.grade.model.UserBean;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,8 @@ public interface UserMapper {
     int insertUser(UserBean person);
 
     @Update({"update pp_user set user_name=#{user_name}, login_token=#{login_token}, login_time=#{login_time}, groupid=#{groupid} where user_id=#{user_id}"})
-    void updateUser(UserBean person);
+    int updateUser(UserBean person);
+
+    @Update({"update pp_user set role=#{role} where user_id=#{user_id}"})
+    int updateUserRole(@Param("user_id") String user_id, @Param("role") int role);
 }

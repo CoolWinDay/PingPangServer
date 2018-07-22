@@ -19,6 +19,11 @@ import java.util.List;
 
 @RestController
 public class GradeController {
+
+    public static final int VenueRole = 3;
+    public static final int AuditorRole = 2;
+    public static final int ExamRole = 1;
+
     @Autowired
     private UserService userService;
 
@@ -27,9 +32,6 @@ public class GradeController {
 
     @Autowired
     private AuditorService auditorService;
-
-    @Autowired
-    private ExamineeService examineeService;
 
     @Autowired
     private ExamService examService;
@@ -106,6 +108,9 @@ public class GradeController {
         }
 
         imageService.insertImages(beanList);
+        if (userBean.getRole() < VenueRole) {
+            userService.updateUserRole(userBean.getUser_id(), VenueRole);
+        }
 
         return response;
     }
@@ -192,6 +197,10 @@ public class GradeController {
             imageService.insertImages(beanList);
         }
 
+        if (userBean.getRole() < AuditorRole) {
+            userService.updateUserRole(userBean.getUser_id(), AuditorRole);
+        }
+
         return response;
     }
 
@@ -209,7 +218,7 @@ public class GradeController {
         }
 
         // 建档
-        int examineeId = -1;
+        int examId = -1;
         ExamBean exam = JSONObject.parseObject(jsonData, ExamBean.class);
         if (exam == null) {
             response.setErrorCode(ResponseBean.ErrorDataCode);
@@ -217,13 +226,8 @@ public class GradeController {
             return response;
         }
         else {
-            ExamineeBean examineeBean = exam.getExaminee();
-            examineeBean.setUser_id(userBean.getUser_id());
-            examineeId = examineeService.insertExaminee(examineeBean);
-
             exam.setUser_id(userBean.getUser_id());
-            exam.setExaminee_id(examineeId);
-            examService.insertExam(exam);
+            examId = examService.insertExam(exam);
         }
 
         // 保存图片
@@ -247,8 +251,8 @@ public class GradeController {
                     out.write(avatar.getBytes());
                     out.flush();
 
-                    if (examineeId != -1) {
-                        imageBean.setPid(examineeId);
+                    if (examId != -1) {
+                        imageBean.setPid(examId);
                     }
                     imageBean.setType(3);
                     imageBean.setName(fileName);
@@ -257,6 +261,10 @@ public class GradeController {
                 }
             }
             imageService.insertImages(beanList);
+        }
+
+        if (userBean.getRole() < ExamRole) {
+            userService.updateUserRole(userBean.getUser_id(), ExamRole);
         }
 
         return response;
@@ -365,7 +373,8 @@ public class GradeController {
             return response;
         }
 
-        List<VenueBean> venues = venueService.venuesWithUser(userBean.getUser_id());
+        List<VenueBean> venues = venueService.myVenueList(userBean.getUser_id());
+
         if (venues != null) {
             response.setData(venues);
         }
@@ -406,7 +415,7 @@ public class GradeController {
             return response;
         }
 
-        List<ExamBean> exams = examService.examWithUser(userBean.getUser_id());
+        List<ExamBean> exams = examService.myExamList(userBean.getUser_id());
 
         if (exams != null) {
             response.setData(exams);

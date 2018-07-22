@@ -62,7 +62,7 @@ public class AuditorService {
     }
 
     public List<AuditorBean> auditorWithUser(String userid) {
-        List<AuditorBean> auditorList = auditorMapper.auditorWithUser(userid);
+        List<AuditorBean> auditorList = auditorMapper.myAuditorList(userid);
 
         for (AuditorBean bean : auditorList) {
             List<ImageBean> avatarImage = imageMapper.imageList(2, bean.getKid(), 3);

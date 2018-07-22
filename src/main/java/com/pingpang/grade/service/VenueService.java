@@ -55,8 +55,8 @@ public class VenueService {
         return check > 0;
     }
 
-    public List<VenueBean> venuesWithUser(String userid) {
-        List<VenueBean> venueList = venueMapper.venuesWithUser(userid);
+    public List<VenueBean> myVenueList(String userid) {
+        List<VenueBean> venueList = venueMapper.myVenueList(userid);
 
         for (VenueBean bean : venueList) {
             List<ImageBean> images = imageMapper.imageList(1, bean.getKid(), 1);

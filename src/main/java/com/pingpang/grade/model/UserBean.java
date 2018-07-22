@@ -7,6 +7,19 @@ public class UserBean {
     private String login_token;
     private String login_time;
     private String groupid;
+    private int role;
+
+    public boolean isVenueUser() {
+        return role == 3;
+    }
+
+    public boolean isAuditorUser() {
+        return role == 2;
+    }
+
+    public boolean isExamUser() {
+        return role == 1;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -46,5 +59,13 @@ public class UserBean {
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
