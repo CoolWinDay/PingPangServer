@@ -8,6 +8,7 @@ public class UserBean {
     private String login_time;
     private String groupid;
     private int role;
+    private String grade;
 
     public boolean isVenueUser() {
         return role == 3;
@@ -67,5 +68,13 @@ public class UserBean {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

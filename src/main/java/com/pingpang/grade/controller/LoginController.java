@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.pingpang.grade.model.ResponseBean;
 import com.pingpang.grade.model.UserBean;
 import com.pingpang.grade.service.LoginService;
+import com.pingpang.grade.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,16 @@ import java.util.Optional;
 public class LoginController {
 
     @Autowired
-    private LoginService userService;
+    private LoginService loginService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/login")
     public JSONObject loginUser(String username, String password) {
         ResponseBean<UserBean> response = new ResponseBean<>();
 
-        JSONObject jsonObject = userService.loginUserFromServer(username, password);
+        JSONObject jsonObject = loginService.loginUserFromServer(username, password);
 
         String errCode = Optional.ofNullable(jsonObject)
                 .map(json -> json.getJSONObject("head"))
@@ -45,7 +49,11 @@ public class LoginController {
             user.setGroupid(groupid);
 
             // 更新user token
-            userService.updateUser(user);
+            loginService.updateUser(user);
+            UserBean userBean = userService.userWithToken(token);
+
+            jsonObject.put("role", userBean.getRole());
+            jsonObject.put("grade", userBean.getGrade());
 
 //            response.setData(user);
         }

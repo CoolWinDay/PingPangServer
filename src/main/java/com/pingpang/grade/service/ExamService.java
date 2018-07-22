@@ -79,8 +79,8 @@ public class ExamService {
         return examList;
     }
 
-    public boolean checkExam(int kid, String userid) {
-        int check = examMapper.checkExam(1, userid, kid);
+    public boolean checkExam(int state, int kid, String userid) {
+        int check = examMapper.checkExam(state, userid, kid);
         return check > 0;
     }
 

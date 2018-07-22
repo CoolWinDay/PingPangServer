@@ -437,7 +437,7 @@ public class GradeController {
     }
 
     @GetMapping("/grade/exam/docheck")
-    public ResponseBean checkExam(int kid, String token) {
+    public ResponseBean checkExam(int state, int kid, String token) {
         ResponseBean response = new ResponseBean();
 
         // 登录校验
@@ -448,7 +448,7 @@ public class GradeController {
             return response;
         }
 
-        boolean isSuccess = examService.checkExam(kid, userBean.getUser_id());
+        boolean isSuccess = examService.checkExam(state, kid, userBean.getUser_id());
         if (!isSuccess) {
             response.setErrorCode(ResponseBean.ErrorOperationCode);
             response.setErrorInfo(ResponseBean.ErrorOperationInfo);
