@@ -404,7 +404,7 @@ public class GradeController {
     }
 
     @GetMapping("/grade/exam/myexam")
-    public ResponseBean myExamList(String token) {
+    public ResponseBean myExamList(boolean checked, String token) {
         ResponseBean response = new ResponseBean();
 
         // 登录校验
@@ -415,7 +415,7 @@ public class GradeController {
             return response;
         }
 
-        List<ExamBean> exams = examService.myExamList(userBean.getUser_id());
+        List<ExamBean> exams = examService.myExamList(checked, userBean.getUser_id());
 
         if (exams != null) {
             response.setData(exams);

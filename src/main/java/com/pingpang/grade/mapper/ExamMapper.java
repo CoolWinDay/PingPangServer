@@ -9,8 +9,14 @@ import java.util.List;
 @Repository
 public interface ExamMapper {
 
-    @Select("SELECT * FROM pp_exam WHERE user_id = #{userid} or venue_id in (SELECT kid FROM pp_venue WHERE user_id = #{userid}) or auditor_id in (SELECT kid FROM pp_auditor WHERE user_id = #{userid})")
-    List<ExamBean> myExamList(@Param("userid") String userid);
+    @Select("SELECT * FROM pp_exam WHERE state = #{state} and (user_id = #{userid} or venue_id in (SELECT kid FROM pp_venue WHERE user_id = #{userid}) or auditor_id in (SELECT kid FROM pp_auditor WHERE user_id = #{userid}))")
+    List<ExamBean> myExamList(@Param("state") int state, @Param("userid") String userid);
+
+    @Select("SELECT * FROM pp_exam WHERE state != 0 and (user_id = #{userid} or venue_id in (SELECT kid FROM pp_venue WHERE user_id = #{userid}) or auditor_id in (SELECT kid FROM pp_auditor WHERE user_id = #{userid}))")
+    List<ExamBean> myCheckedExamList( @Param("userid") String userid);
+
+    @Select("SELECT * FROM pp_exam WHERE state = 0 and (user_id = #{userid} or venue_id in (SELECT kid FROM pp_venue WHERE user_id = #{userid}) or auditor_id in (SELECT kid FROM pp_auditor WHERE user_id = #{userid}))")
+    List<ExamBean> myUncheckExamList(@Param("userid") String userid);
 
     @Select("SELECT * FROM pp_exam WHERE state = #{state}")
     List<ExamBean> checkExamsWithState(@Param("state") int state);

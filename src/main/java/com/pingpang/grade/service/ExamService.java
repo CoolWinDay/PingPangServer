@@ -9,6 +9,7 @@ import com.pingpang.grade.model.VenueBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,8 +32,14 @@ public class ExamService {
         return bean.getKid();
     }
 
-    public List<ExamBean> myExamList(String userid) {
-        List<ExamBean> examList = examMapper.myExamList(userid);
+    public List<ExamBean> myExamList(boolean isChecked, String userid) {
+        List<ExamBean> examList;
+        if (isChecked) {
+            examList = examMapper.myCheckedExamList(userid);
+        }
+        else {
+            examList = examMapper.myUncheckExamList(userid);
+        }
 
         for (ExamBean bean : examList) {
             List<ImageBean> imageBeans = imageMapper.imageList(3, bean.getKid(), 3);
