@@ -6,6 +6,7 @@ import com.pingpang.grade.mapper.VenueMapper;
 import com.pingpang.grade.model.ImageBean;
 import com.pingpang.grade.model.UserBean;
 import com.pingpang.grade.model.VenueBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +71,15 @@ public class VenueService {
     public VenueBean venueWithId(int kid) {
         VenueBean venueBean = venueMapper.venueWithId(kid);
         return venueBean;
+    }
+
+    public int venueCount(int state) {
+        if (state == -1) {
+            return venueMapper.venueCountAll();
+        }
+        else {
+            return venueMapper.venueCountWithState(state);
+        }
     }
 
 }

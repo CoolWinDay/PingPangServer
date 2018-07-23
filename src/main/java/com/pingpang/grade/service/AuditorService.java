@@ -91,4 +91,13 @@ public class AuditorService {
         return check > 0;
     }
 
+    public int auditorCount(int state) {
+        if (state == -1) {
+            return auditorMapper.auditorCountAll();
+        }
+        else {
+            return auditorMapper.auditorCountWithState(state);
+        }
+    }
+
 }

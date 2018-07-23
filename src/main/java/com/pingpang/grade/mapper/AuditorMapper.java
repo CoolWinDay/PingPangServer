@@ -27,4 +27,10 @@ public interface AuditorMapper {
 
     @Update({"update pp_auditor set state=#{state}, check_user=#{userid} where kid = #{kid}"})
     int checkAuditor(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
+
+    @Select("SELECT count(*) FROM pp_auditor WHERE state = #{state}")
+    int auditorCountWithState(@Param("state") int state);
+
+    @Select("SELECT count(*) FROM pp_auditor")
+    int auditorCountAll();
 }

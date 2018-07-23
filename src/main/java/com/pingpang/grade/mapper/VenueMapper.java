@@ -27,4 +27,10 @@ public interface VenueMapper {
 
     @Update({"update pp_venue set state=#{state}, check_user=#{userid} where kid = #{kid}"})
     int checkVenue(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
+
+    @Select("SELECT count(*) FROM pp_venue WHERE state = #{state}")
+    int venueCountWithState(@Param("state") int state);
+
+    @Select("SELECT count(*) FROM pp_venue")
+    int venueCountAll();
 }

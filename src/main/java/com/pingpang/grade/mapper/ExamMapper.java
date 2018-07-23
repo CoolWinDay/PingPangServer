@@ -27,4 +27,10 @@ public interface ExamMapper {
 
     @Update({"update pp_exam set state=#{state}, check_user=#{userid} where kid = #{kid}"})
     int checkExam(@Param("state") int state, @Param("userid") String userid, @Param("kid") int kid);
+
+    @Select("SELECT count(*) FROM pp_exam WHERE state = #{state}")
+    int examCountWithState(@Param("state") int state);
+
+    @Select("SELECT count(*) FROM pp_exam")
+    int examCountAll();
 }

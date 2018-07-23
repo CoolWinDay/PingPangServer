@@ -456,4 +456,48 @@ public class GradeController {
 
         return response;
     }
+
+    @GetMapping("/grade/statistics")
+    public ResponseBean statisticsAll(String token) {
+        ResponseBean response = new ResponseBean();
+
+        // 登录校验
+        UserBean userBean = userService.userWithToken(token);
+        if (userBean == null) {
+            response.setErrorCode(ResponseBean.ErrorTokenCode);
+            response.setErrorInfo(ResponseBean.ErrorTokenInfo);
+            return response;
+        }
+
+        int v0 = venueService.venueCount(-1);
+        int v1 = venueService.venueCount(1);
+        int v2 = venueService.venueCount(0);
+
+        int a0 = auditorService.auditorCount(-1);
+        int a1 = auditorService.auditorCount(1);
+        int a2 = auditorService.auditorCount(0);
+
+        int e0 = examService.examCount(-1);
+        int e1 = examService.examCount(1);
+        int e2 = examService.examCount(2);
+        int e3 = examService.examCount(0);
+
+        StatisticsBean statisticsBean = new StatisticsBean();
+        statisticsBean.setVenueCountAll(v0);
+        statisticsBean.setVenueCountChecked(v1);
+        statisticsBean.setVenueCountUncheck(v2);
+
+        statisticsBean.setAuditorCountAll(a0);
+        statisticsBean.setAuditorCountChecked(a1);
+        statisticsBean.setAuditorCountUncheck(a2);
+
+        statisticsBean.setExamCountAll(e0);
+        statisticsBean.setExamCountPassed(e1);
+        statisticsBean.setExamCountUnpass(e2);
+        statisticsBean.setExamCountWaiting(e3);
+
+        response.setData(statisticsBean);
+
+        return response;
+    }
 }

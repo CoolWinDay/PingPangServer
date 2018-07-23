@@ -91,4 +91,13 @@ public class ExamService {
         return check > 0;
     }
 
+    public int examCount(int state) {
+        if (state == -1) {
+            return examMapper.examCountAll();
+        }
+        else {
+            return examMapper.examCountWithState(state);
+        }
+    }
+
 }
