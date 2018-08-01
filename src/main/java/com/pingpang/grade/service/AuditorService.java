@@ -81,6 +81,26 @@ public class AuditorService {
         return auditorList;
     }
 
+    public List<AuditorBean> topAuditorList() {
+        List<AuditorBean> auditorList = auditorMapper.topAuditorList();
+
+        for (AuditorBean bean : auditorList) {
+            List<ImageBean> avatarImage = imageMapper.imageList(2, bean.getKid(), 3);
+            if (avatarImage.size() > 0) {
+                bean.setAvatarImage(avatarImage.get(0));
+            }
+
+            List<ImageBean> images = imageMapper.imageList(2, bean.getKid(), 2);
+            bean.getCertificateImage().clear();
+            bean.getCertificateImage().addAll(images);
+
+            VenueBean venueBean = venueMapper.venueWithId(bean.getVenue_id());
+            bean.setVenue(venueBean);
+        }
+
+        return auditorList;
+    }
+
     public AuditorBean auditorWithId(int kid) {
         AuditorBean auditorBean = auditorMapper.auditorWithId(kid);
         return auditorBean;

@@ -25,6 +25,8 @@ public class AuditorBean implements Serializable {
     private VenueBean venue;
     private int state;
 
+    private int examcount;
+
     public int getKid() {
         return kid;
     }
@@ -134,5 +136,13 @@ public class AuditorBean implements Serializable {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getExamcount() {
+        return examcount;
+    }
+
+    public void setExamcount(int examcount) {
+        this.examcount = examcount;
     }
 }

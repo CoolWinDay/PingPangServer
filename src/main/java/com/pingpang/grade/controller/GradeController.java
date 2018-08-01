@@ -500,4 +500,17 @@ public class GradeController {
 
         return response;
     }
+
+    @GetMapping("/grade/auditor/topauditor")
+    public ResponseBean topAuditorList() {
+        ResponseBean response = new ResponseBean();
+
+        List<AuditorBean> auditors = auditorService.topAuditorList();
+
+        if (auditors != null) {
+            response.setData(auditors);
+        }
+
+        return response;
+    }
 }
